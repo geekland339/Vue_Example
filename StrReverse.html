@@ -7,20 +7,23 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="app">{{counter}}</div>
+    <div id="app">
+      {{msg}}
+      <button v-on:click="reverseclick">点击反转</button>
+    </div>
     <script>
       // 实例化Vue
       const app = Vue.createApp({
         data() {
           return {
-            counter: 1,
+            msg: 'helloWorld',
           };
         },
-        mounted() {
-          // 定时器，每1秒加1
-          setInterval(() => {
-            this.counter += 1;
-          }, 1000);
+        methods: {
+          reverseclick() {
+            // 把msg倒置后赋值给msg
+            this.msg = this.msg.split('').reverse().join('');
+          },
         },
       });
       // 挂载到app的DOM节点

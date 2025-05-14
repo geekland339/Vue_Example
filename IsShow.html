@@ -7,20 +7,22 @@
     <title>Document</title>
   </head>
   <body>
-    <div id="app">{{counter}}</div>
+    <div id="app">
+      <div v-if="show">Hello</div>
+      <button v-on:click="isshowclick">显示/隐藏</button>
+    </div>
     <script>
       // 实例化Vue
       const app = Vue.createApp({
         data() {
           return {
-            counter: 1,
+            show: true,
           };
         },
-        mounted() {
-          // 定时器，每1秒加1
-          setInterval(() => {
-            this.counter += 1;
-          }, 1000);
+        methods: {
+          isshowclick() {
+            this.show = !this.show;
+          },
         },
       });
       // 挂载到app的DOM节点

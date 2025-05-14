@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="msg" />
+      <button v-on:click="addclick" v-bind:title="title">添加</button>
+      <ul>
+        <todo-list
+          v-for="(item,index) of list"
+          v-bind:item="item"
+          v-bind:index="index"
+        ></todo-list>
+      </ul>
+    </div>
+    <script>
+      // 实例化Vue
+      const app = Vue.createApp({
+        data() {
+          return {
+            list: [],
+            msg: '',
+            title: '这是一个title',
+          };
+        },
+        methods: {
+          addclick() {
+            this.list.push(this.msg);
+            // 添加后置空
+            this.msg = '';
+          },
+        },
+      });
+      app.component('todo-list', {
+        // 接受父组件传递过来的数据
+        props: ['content', 'index'],
+        template: '<li>{{index}}-----{{item}}</li>',
+      });
+      // 挂载到app的DOM节点
+      app.mount('#app');
+    </script>
+  </body>
+</html>
